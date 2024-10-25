@@ -1,42 +1,165 @@
-@keyframes animateColor {
-    0% {
-        filter: hue-rotate(0deg);
-    }
-    100% {
-        filter: hue-rotate(360deg);
-    }
+:root {
+    --clr: rgba(0, 255, 0, 0.7);
+    /* Color for glow effect */
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    /* Enable flexbox */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
 }
 
 .container .cloud {
     position: relative;
-    width: 300px;
+    width: 350px;
+    /* Slightly larger for better effect */
     z-index: 100;
-    filter: drop-shadow(0 0 35px var(--clr));
+    background: linear-gradient(135deg, rgba(0, 255, 0, 0.3), rgba(0, 255, 0, 0.7));
+    border: 2px solid rgba(0, 255, 0, 0.5);
+    border-radius: 15px;
+    /* Rounded corners */
+    padding: 20px;
+    /* Add some padding */
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+    /* Soft glow effect */
+    animation: animateColor 10s infinite linear, float 3s ease-in-out infinite;
+    /* Added float animation */
+}
+
+/* Float animation for a subtle bouncing effect */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+        /* Float up */
+    }
 }
 
 .container .cloud h2 {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     white-space: nowrap;
     color: #000;
-    font-size: 2em;
+    font-size: 2.5em;
+    /* Increased font size */
     z-index: 1000;
     font-weight: 400;
-    padding: 0 10px;
+    padding: 10px 20px;
+    /* Adjust padding */
     border-radius: 10px;
     text-transform: uppercase;
-    background: var(--clr);
+    background: transparent;
+    /* Make background transparent */
 }
 
 .container .cloud h2::before {
     content: "";
     position: absolute;
-    top: -115px;
+    top: -150px;
+    /* Adjust position to fit the cloud */
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 100px;
-    width: 120%;
+    border-radius: 50%;
+    /* Make it circular */
+    width: 150%;
+    /* Wider than the cloud for a fluffy effect */
+    height: 120px;
+    /* Height of the cloud effect */
+    background: rgba(0, 255, 0, 0.5);
+    /* Semi-transparent background */
+    filter: blur(15px);
+    /* Soft blur for a cloud effect */
+    z-index: -1;
+    /* Position it behind the text */
+}
+
+/* Additional cloud-like elements */
+.container .cloud h2::after {
+    content: "";
+    position: absolute;
+    top: -80px;
+    /* Adjust position */
+    left: 20%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    width: 130%;
     height: 100px;
-    background: var(--clr);
+    background: rgba(0, 255, 0, 0.5);
+    filter: blur(15px);
+    z-index: -1;
+}
+
+.container .cloud h2::after {
+    content: "";
+    position: absolute;
+    top: -90px;
+    /* Adjust position */
+    left: 70%;
+    /* Offset to the right */
+    transform: translateX(-50%);
+    border-radius: 50%;
+    width: 120%;
+    height: 90px;
+    background: rgba(0, 255, 0, 0.5);
+    filter: blur(15px);
+    z-index: -1;
+}
+
+@keyframes animateColor {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Raindrop styles */
+.drop {
+    position: absolute;
+    color: #0F0;
+    /* Green color for the drops */
+    white-space: nowrap;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        top: -10px;
+        /* Start above the viewport */
+        opacity: 1;
+    }
+
+    100% {
+        top: 100vh;
+        /* End at the bottom of the viewport */
+        opacity: 0;
+        /* Fade out */
+    }
+}
+
+/* Canvas styles */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
