@@ -1,29 +1,28 @@
 function randomText() {
-    const text = ("!@#$%^*()")
-    letters = text[Math.floor(Math.random() * text.length)];
-    return letters;
+    const text = "❤️ANASTASIA$";
+    return text[Math.floor(Math.random() * text.length)];
 }
 
 function rain() {
-    let cloud = document.querySelector('.cloud');
     let e = document.createElement('div');
     e.classList.add('drop');
-    cloud.appendChild(e);
+    document.body.appendChild(e); // Append to body
 
-    let left = Math.floor(Math.random() * 300);
+    let left = Math.floor(Math.random() * window.innerWidth); // Full width of the viewport
     let size = Math.random() * 1.5;
-    let duration = Math.random() * 1;
+    let duration = Math.random() * 2 + 1; // Fall duration
 
     e.innerText = randomText();
     e.style.left = left + 'px';
     e.style.fontSize = 0.5 + size + 'em';
     e.style.animationDuration = 1 + duration + 's';
 
-    setTimeout(function (){
-        cloud.removeChild(e)
-    },2000)
+    setTimeout(function () {
+        document.body.removeChild(e); // Remove from body after falling
+    }, 2000);
 }
 
+// Create rain at intervals
 setInterval(function () {
-    rain()
-}, 20)
+    rain();
+}, 20);
